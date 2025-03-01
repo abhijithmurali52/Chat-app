@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API = axios.create({ baseURL: 'http://localhost:5000/api' }); // Replace with your backend URL
+const API = axios.create({ baseURL: 'https://chat-app-backend-khpw.onrender.com/api' }); // Replace with your backend URL
 
 // Add token to requests
 API.interceptors.request.use((req) => {

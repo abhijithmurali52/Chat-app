@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import io from 'socket.io-client';
 import axios from 'axios';
 
-const socket = io('http://localhost:5000');
+const socket = io('https://chat-app-backend-khpw.onrender.com');
 
 const Chat = () => {
   const user = useSelector((state) => state.user.user); // Get user from Redux
@@ -18,7 +18,7 @@ const Chat = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/users/users');
+        const response = await axios.get('https://chat-app-backend-khpw.onrender.com/api/users/users');
         setUsers(response.data);
       } catch (err) {
         setError(err.response?.data?.message || 'Failed to fetch users');
@@ -32,7 +32,7 @@ const Chat = () => {
 
   useEffect(() => {
     if (selectedUser) {
-      axios.get(`http://localhost:5000/api/messages/${selectedUser._id}`, { withCredentials: true })
+      axios.get(`https://chat-app-backend-khpw.onrender.com/api/messages/${selectedUser._id}`, { withCredentials: true })
         .then(res => setMessages(res.data))
         .catch(err => console.error('Error fetching messages:', err));
     }
@@ -59,7 +59,7 @@ const Chat = () => {
     };
 
     try {
-      const res = await axios.post('http://localhost:5000/api/messages', messageData, { withCredentials: true });
+      const res = await axios.post('https://chat-app-backend-khpw.onrender.com/api/messages', messageData, { withCredentials: true });
       setMessages([...messages, res.data]);
       socket.emit('sendMessage', res.data);
       setNewMessage('');
